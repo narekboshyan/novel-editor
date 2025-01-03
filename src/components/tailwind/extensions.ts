@@ -16,9 +16,7 @@ import {
   TiptapImage,
   TiptapLink,
   TiptapUnderline,
-  Twitter,
   UpdatedImage,
-  Youtube,
   Mathematics,
 } from "novel/extensions";
 import { UploadImagesPlugin } from "novel/plugins";
@@ -33,7 +31,7 @@ const placeholder = Placeholder;
 const tiptapLink = TiptapLink.configure({
   HTMLAttributes: {
     class: cx(
-      "text-muted-foreground underline underline-offset-[3px] hover:text-primary transition-colors cursor-pointer",
+      "text-muted-foreground underline underline-offset-[3px] hover:text-primary transition-colors cursor-pointer"
     ),
   },
 });
@@ -100,7 +98,9 @@ const starterKit = StarterKit.configure({
   },
   codeBlock: {
     HTMLAttributes: {
-      class: cx("rounded-md bg-muted text-muted-foreground border p-5 font-mono font-medium"),
+      class: cx(
+        "rounded-md bg-muted text-muted-foreground border p-5 font-mono font-medium"
+      ),
     },
   },
   code: {
@@ -123,20 +123,6 @@ const codeBlockLowlight = CodeBlockLowlight.configure({
   lowlight: createLowlight(common),
 });
 
-const youtube = Youtube.configure({
-  HTMLAttributes: {
-    class: cx("rounded-lg border border-muted"),
-  },
-  inline: false,
-});
-
-const twitter = Twitter.configure({
-  HTMLAttributes: {
-    class: cx("not-prose"),
-  },
-  inline: false,
-});
-
 const mathematics = Mathematics.configure({
   HTMLAttributes: {
     class: cx("text-foreground rounded p-1 hover:bg-accent cursor-pointer"),
@@ -151,8 +137,8 @@ const characterCount = CharacterCount.configure();
 const markdownExtension = MarkdownExtension.configure({
   html: true,
   tightLists: true,
-  tightListClass: 'tight',
-  bulletListMarker: '-',
+  tightListClass: "tight",
+  bulletListMarker: "-",
   linkify: false,
   breaks: false,
   transformPastedText: false,
@@ -170,8 +156,6 @@ export const defaultExtensions = [
   horizontalRule,
   aiHighlight,
   codeBlockLowlight,
-  youtube,
-  twitter,
   mathematics,
   characterCount,
   TiptapUnderline,
