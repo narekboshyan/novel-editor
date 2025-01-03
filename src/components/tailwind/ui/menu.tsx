@@ -5,21 +5,6 @@ import { useTheme } from "next-themes";
 import { Button } from "./button";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
-// TODO implement multiple fonts editor
-// const fonts = [
-//   {
-//     font: "Default",
-//     icon: <FontDefault className="h-4 w-4" />,
-//   },
-//   {
-//     font: "Serif",
-//     icon: <FontSerif className="h-4 w-4" />,
-//   },
-//   {
-//     font: "Mono",
-//     icon: <FontMono className="h-4 w-4" />,
-//   },
-// ];
 const appearances = [
   {
     theme: "System",
@@ -66,7 +51,9 @@ export default function Menu() {
             </button>
           ))}
         </div> */}
-        <p className="p-2 text-xs font-medium text-muted-foreground">Appearance</p>
+        <p className="p-2 text-xs font-medium text-muted-foreground">
+          Appearance
+        </p>
         {appearances.map(({ theme, icon }) => (
           <Button
             variant="ghost"
@@ -80,7 +67,9 @@ export default function Menu() {
               <div className="rounded-sm border  p-1">{icon}</div>
               <span>{theme}</span>
             </div>
-            {currentTheme === theme.toLowerCase() && <Check className="h-4 w-4" />}
+            {currentTheme === theme.toLowerCase() && (
+              <Check className="h-4 w-4" />
+            )}
           </Button>
         ))}
       </PopoverContent>

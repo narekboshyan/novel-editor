@@ -24,7 +24,6 @@ import GenerativeMenuSwitch from "../tailwind/generative/generative-menu-switch"
 import { Separator } from "../tailwind/ui/separator";
 import { NodeSelector } from "../tailwind/selectors/node-selector";
 import { LinkSelector } from "../tailwind/selectors/link-selector";
-import { MathSelector } from "../tailwind/selectors/math-selector";
 import { TextButtons } from "../tailwind/selectors/text-buttons";
 import { ColorSelector } from "../tailwind/selectors/color-selector";
 
@@ -34,8 +33,6 @@ const TailwindAdvancedEditor = () => {
   const [initialContent, setInitialContent] = useState<null | JSONContent>(
     null
   );
-  const [saveStatus, setSaveStatus] = useState("Saved");
-  const [charsCount, setCharsCount] = useState<number>();
 
   const [openNode, setOpenNode] = useState(false);
   const [openColor, setOpenColor] = useState(false);
@@ -53,7 +50,6 @@ const TailwindAdvancedEditor = () => {
   const debouncedUpdates = useDebouncedCallback(
     async (editor: EditorInstance) => {
       const json = editor.getJSON();
-      setCharsCount(editor.storage.characterCount.words());
       window.localStorage.setItem(
         "html-content",
         highlightCodeblocks(editor.getHTML())
@@ -63,7 +59,6 @@ const TailwindAdvancedEditor = () => {
         "markdown",
         editor.storage.markdown.getMarkdown()
       );
-      setSaveStatus("Saved");
     },
     500
   );
@@ -78,16 +73,6 @@ const TailwindAdvancedEditor = () => {
 
   return (
     <div className="relative w-full max-w-screen-lg">
-      <div className="absolute right-5 top-5 z-10 flex gap-2">
-        <div className="rounded-lg bg-accent px-2 py-1 text-sm text-muted-foreground">
-          {saveStatus}
-        </div>
-        {charsCount && (
-          <div className="rounded-lg bg-accent px-2 py-1 text-sm text-muted-foreground">
-            {charsCount} Words
-          </div>
-        )}
-      </div>
       <EditorRoot>
         <EditorContent
           initialContent={initialContent}
@@ -108,7 +93,6 @@ const TailwindAdvancedEditor = () => {
           }}
           onUpdate={({ editor }) => {
             debouncedUpdates(editor);
-            setSaveStatus("Unsaved");
           }}
           slotAfter={<ImageResizer />}
         >
@@ -143,7 +127,6 @@ const TailwindAdvancedEditor = () => {
             <Separator orientation="vertical" />
             <LinkSelector open={openLink} onOpenChange={setOpenLink} />
             <Separator orientation="vertical" />
-            <MathSelector />
             <Separator orientation="vertical" />
             <TextButtons />
             <Separator orientation="vertical" />
